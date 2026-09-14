@@ -3,7 +3,7 @@
 
 module tb_sha256;
 
-    // --- Khai b·o tÌn hi?u k?t n?i ---
+    // --- Khai b√°o t√≠n hi?u k?t n?i ---
     reg          clk;
     reg          reset_n;
     reg  [7:0]   in_data;
@@ -31,41 +31,41 @@ module tb_sha256;
         forever #5 clk = ~clk; // Chu k? 10ns
     end
 
-    // --- Task t? ??ng b?m chu?i v‡ ki?m tra k?t qu? ---
-    // H? tr? chu?i d‡i t?i ?a 32 k˝ t? (ch?nh [8*32-1:0] n?u c?n d‡i h?n)
+    // --- Task t? ??ng b?m chu?i v√† ki?m tra k?t qu? ---
+    // H? tr? chu?i d√†i t?i ?a 32 k√Ω t? (ch?nh [8*32-1:0] n?u c?n d√†i h?n)
     task test_string;
-        input [8*32-1:0] str;           // Chu?i d? li?u ??u v‡o
-        input integer    len;           // ?? d‡i chu?i (s? l??ng byte)
-        input [255:0]    expected_hash; // M„ b?m ?˙ng ?? ??i chi?u
+        input [8*32-1:0] str;           // Chu?i d? li?u ??u v√†o
+        input integer    len;           // ?? d√†i chu?i (s? l??ng byte)
+        input [255:0]    expected_hash; // M√£ b?m ?√∫ng ?? ??i chi?u
         
         integer i;
         reg [7:0] char;
         begin
             $display("=== DANG TEST CHUOI CO DO DAI %0d BYTE ===", len);
             
-            // VÚng l?p b?m t?ng byte v‡o m?ch
+            // V√≤ng l?p b?m t?ng byte v√†o m?ch
             for (i = len; i > 0; i = i - 1) begin
-                char = str[(i*8-1) -: 8]; // TrÌch xu?t t?ng byte (t? tr·i qua ph?i)
+                char = str[(i*8-1) -: 8]; // Tr√≠ch xu?t t?ng byte (t? tr√°i qua ph?i)
                 
-                // ??a tÌn hi?u v‡o s??n xu?ng ?? tr·nh vi ph?m Setup/Hold time
+                // ??a t√≠n hi?u v√†o s??n xu?ng ?? tr√°nh vi ph?m Setup/Hold time
                 @(negedge clk);
                 while (!pad_ready) @(negedge clk); // ??i m?ch ??m r?nh
                 
                 valid_input = 1'b1;
                 in_data     = char;
-                lastbyte    = (i == 1) ? 1'b1 : 1'b0; // B?t lastbyte n?u l‡ byte cu?i
+                lastbyte    = (i == 1) ? 1'b1 : 1'b0; // B?t lastbyte n?u l√† byte cu?i
             end
             
-            // XÛa c? ?i?u khi?n sau khi n?p xong
+            // X√≥a c? ?i?u khi?n sau khi n?p xong
             @(negedge clk);
             valid_input = 1'b0;
             lastbyte    = 1'b0;
             
-            // ??i ph?n c?ng b?m xong (c? hash_done b?t lÍn 1)
+            // ??i ph?n c?ng b?m xong (c? hash_done b?t l√™n 1)
             $display("-> Dang cho phan cung xu ly (di qua Pipeline)...");
             while (!hash_done) @(posedge clk);
             
-            // ?„ b?m xong, ti?n h‡nh ??i chi?u
+            // ?√£ b?m xong, ti?n h√†nh ??i chi?u
             if (digest === expected_hash) begin
                 $display("[PASS] Ma bam SHA-256 tao ra CHINH XAC!");
                 $display(" Ket qua: %x", digest);
@@ -76,14 +76,14 @@ module tb_sha256;
             end
             $display("------------------------------------------------\n");
             
-            // Ngh? v‡i nh?p clock tr??c khi test chu?i ti?p theo
+            // Ngh? v√†i nh?p clock tr??c khi test chu?i ti?p theo
             repeat(10) @(posedge clk);
         end
     endtask
 
     // --- K?ch b?n Test (Test Scenario) ---
     initial begin
-        // Kh?i t?o c·c tÌn hi?u v? 0
+        // Kh?i t?o c√°c t√≠n hi?u v? 0
         reset_n     = 0;
         in_data     = 8'd0;
         valid_input = 0;
@@ -109,7 +109,7 @@ module tb_sha256;
             256'hb732b1df7676b834dbdfdbafff87c4645247dd1198bd44ad48d090827793174c
         );
 
-        // K?t th˙c mÙ ph?ng
+        // K?t th√∫c m√¥ ph?ng
         $display("--- HOAN TAT KIEM TRA ---");
         $finish;
     end
