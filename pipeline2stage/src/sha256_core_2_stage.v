@@ -82,7 +82,7 @@ module sha256_core_2stage (
                         p_Maj   <= (a & b) ^ (a & c) ^ (b & c);
                         p_s0    <= {a[1:0], a[31:2]} ^ {a[12:0], a[31:13]} ^ {a[21:0], a[31:22]};
                         p_s1    <= {e[5:0], e[31:6]} ^ {e[10:0], e[31:11]} ^ {e[24:0], e[31:25]};
-                        p_h_K_W <= h + K[round_cnt] + W[0]; // Tính s?n h + K + W
+                        p_h_K_W <= h + K[round_cnt] + W[0]; // TÃ­nh s?n h + K + W
                         
                         p_W_next <= W_next_comb; // C?t tr? cho m?ch sinh W
 
