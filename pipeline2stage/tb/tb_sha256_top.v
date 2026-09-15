@@ -42,7 +42,7 @@ module tb_sha256;
     end
 
     // --- TASK T? ??NG B?M CHU?I ---
-    // T?ng gi?i h?n m?ng lên 128 bytes (8*128-1:0) ?? ch?a chu?i siêu dài
+    // T?ng gi?i h?n m?ng lÃªn 128 bytes (8*128-1:0) ?? ch?a chu?i siÃªu dÃ i
     task test_string;
         input [8*128-1:0] str;           
         input integer     len;           
@@ -75,7 +75,7 @@ module tb_sha256;
             $display("-> Dang cho phan cung xu ly...");
             while (!hash_done) @(posedge clk);
             
-            // Ghi nh?n th?i ?i?m tính xong
+            // Ghi nh?n th?i ?i?m tÃ­nh xong
             end_clk = clk_cnt;
             
             // In k?t qu? ??i chi?u
@@ -87,7 +87,7 @@ module tb_sha256;
             $display(" Ket qua thuc te: %x", digest);
             $display(" Ket qua ky vong: %x", expected_hash);
             
-            // In s? clock ?ã tiêu t?n
+            // In s? clock ?Ã£ tiÃªu t?n
             $display("-> Tong thoi gian xu ly: %0d chu ky xung nhip (clock cycles)", end_clk - start_clk);
             $display("------------------------------------------------\n");
             
@@ -121,7 +121,7 @@ module tb_sha256;
             256'hb732b1df7676b834dbdfdbafff87c4645247dd1198bd44ad48d090827793174c
         );
 
-        // TEST CASE 3 (New): 68 bytes (V??t 55 byte -> S? t? ??ng nh?y thành 2 Block)
+        // TEST CASE 3 (New): 68 bytes (V??t 55 byte -> S? t? ??ng nh?y thÃ nh 2 Block)
         test_string(
             "toiiiiiiiiiiiiiiiiiiiiiiiiiiiiiajffajaifajijiacanccncanncancacandjdj", 
             68, 
